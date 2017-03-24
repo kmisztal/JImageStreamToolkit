@@ -17,10 +17,12 @@ public class Image extends StreamableImage implements Cloneable {
 
     public Image(String filename) throws IOException {
         super(new File(filename));
+        this.unpackedImage = new UnpackedImage(this.bufferedImage);
     }
 
     public Image(BufferedImage bufferedImage) {
         super(bufferedImage);
+        this.unpackedImage = new UnpackedImage(this.bufferedImage);
     }
 
     private static BufferedImage copyBufferedImage(BufferedImage source) {
