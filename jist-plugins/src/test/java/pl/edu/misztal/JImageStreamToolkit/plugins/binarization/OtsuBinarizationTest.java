@@ -14,6 +14,7 @@ public class OtsuBinarizationTest {
         File file = new File(classLoader.getResource("lena.png").getFile());
 
         Image image = new Image(file);
+        new ImageFrame(image).display(false);
         new GrayScale().process(image);
         new OtsuBinarization().process(image);
         new ImageFrame(image).display();
