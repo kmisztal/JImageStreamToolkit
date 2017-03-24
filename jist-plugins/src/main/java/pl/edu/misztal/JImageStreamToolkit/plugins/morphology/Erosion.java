@@ -3,9 +3,6 @@ package pl.edu.misztal.JImageStreamToolkit.plugins.morphology;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
-/**
- * Created by krzys on 24.03.2017.
- */
 public class Erosion extends Plugin {
     private final int kernelSize;
 
