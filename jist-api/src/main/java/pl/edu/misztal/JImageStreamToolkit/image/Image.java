@@ -42,8 +42,16 @@ public class Image extends StreamableImage implements Cloneable {
         try {
             ret = (Image) super.clone();
             ret.setBufferedImage(copyImage(bufferedImage));
-        } catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException ignored) {
         }
         return ret;
+    }
+
+    public int getWidht() {
+        return this.bufferedImage.getWidth();
+    }
+
+    public int getHeight() {
+        return this.bufferedImage.getHeight();
     }
 }
