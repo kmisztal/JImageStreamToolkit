@@ -47,7 +47,7 @@ public class Image extends StreamableImage implements Cloneable {
         return ret;
     }
 
-    public int getWidht() {
+    public int getWidth() {
         return this.bufferedImage.getWidth();
     }
 
