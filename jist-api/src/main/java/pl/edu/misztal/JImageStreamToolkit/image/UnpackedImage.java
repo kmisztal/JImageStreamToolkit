@@ -18,4 +18,13 @@ class UnpackedImage {
     Pixel getPixel(int x, int y) {
         return new Pixel(this.unpackedImage.getPixel(x, y));
     }
+
+    public void update() {
+        unpackedImage.update();
+    }
+
+    BufferedImage getBufferdImage() {
+        return unpackedImage.getBufferedImage();
+    }
+
 }

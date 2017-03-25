@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class Image extends StreamableImage implements Cloneable {
     private UnpackedImage unpackedImage;
+
     public Image(File file) throws IOException {
         super(file);
         this.unpackedImage = new UnpackedImage(this.bufferedImage);
@@ -78,6 +79,11 @@ public class Image extends StreamableImage implements Cloneable {
 
     public final void setPixel(int x, int y, Pixel pixel) {
         unpackedImage.setPixel(x, y, pixel);
+    }
+
+    public final void update() {
+        unpackedImage.update();
+        bufferedImage = unpackedImage.getBufferdImage();
     }
 
 }
