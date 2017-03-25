@@ -88,6 +88,7 @@ public final class ImageFrame extends JDialog {
 
     public void display() {
         this.setVisible(true);
+        this.setVisible(false);
     }
 
     public void display(boolean modal) {
