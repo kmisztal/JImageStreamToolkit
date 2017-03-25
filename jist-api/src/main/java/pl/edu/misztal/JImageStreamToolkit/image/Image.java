@@ -81,7 +81,7 @@ public class Image extends StreamableImage implements Cloneable {
         unpackedImage.setPixel(x, y, pixel);
     }
 
-    public final void update() {
+    public final void update(boolean t) {
         unpackedImage.update();
         bufferedImage = unpackedImage.getBufferdImage();
     }
