@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.github.kmisztal</groupId>
             <artifactId>JImageStream</artifactId>
-            <version>d1a9d910b4</version>
+            <version>c352932</version>
         </dependency>
     </dependencies>
 </project>
