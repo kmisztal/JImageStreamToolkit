@@ -77,6 +77,10 @@ public class Image extends StreamableImage implements Cloneable {
         return unpackedImage.getPixel(x, y).getBlue();
     }
 
+    public final int getAlpha(int x, int y) {
+        return unpackedImage.getPixel(x, y).getAlpha();
+    }
+
     public final void setPixel(int x, int y, Pixel pixel) {
         unpackedImage.setPixel(x, y, pixel);
     }
