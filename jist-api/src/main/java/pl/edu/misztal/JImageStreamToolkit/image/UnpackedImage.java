@@ -12,7 +12,7 @@ class UnpackedImage {
     }
 
     void setPixel(int x, int y, Pixel pixel) {
-        this.unpackedImage.setPixel(x, y, pixel.getAlpha(), pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+        this.unpackedImage.setPixel(x, y, pixel.getRed(), pixel.getGreen(), pixel.getBlue(), pixel.getAlpha());
     }
 
     Pixel getPixel(int x, int y) {
