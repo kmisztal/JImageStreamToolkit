@@ -2,7 +2,30 @@ package pl.edu.misztal.JImageStreamToolkit.utils;
 
 public enum ColorHelper {
 
-    RED(0), GREEN(1), BLUE(2);
+    RED(0) {
+        @Override
+        public int getColor(int rgb) {
+            return (rgb >> 16) & 0xFF;
+        }
+    },
+    GREEN(1) {
+        @Override
+        public int getColor(int rgb) {
+            return (rgb >> 8) & 0xFF;
+        }
+    },
+    BLUE(2) {
+        @Override
+        public int getColor(int rgb) {
+            return (rgb) & 0xFF;
+        }
+    },
+    ALPHA(3) {
+        @Override
+        public int getColor(int rgb) {
+            return (rgb >> 24) & 0xff;
+        }
+    };
     private final int value;
 
     ColorHelper(int v) {
@@ -23,21 +46,18 @@ public enum ColorHelper {
         return val;
     }
 
-    public int get() {
-        return value;
+    public static int getRGB(int r, int g, int b, int a) {
+        return ((a & 0xFF) << 24) |
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8) |
+                ((b & 0xFF));
     }
 
-    public int getColor(int val) {
-        switch (this) {
-            case RED:
-                return (val & 0x00FF0000) >>> 16;
-            case GREEN:
-                return (val & 0x0000FF00) >>> 8;
-            case BLUE:
-                return (val & 0x000000FF);
-        }
-        throw new RuntimeException("Wrong using ");
+    public static int getRGB(int r, int g, int b) {
+        return getRGB(r, g, b, 255);
     }
+
+    public abstract int getColor(int rgb);
 
     /**
      * Limits the color value between 0 and 255.
@@ -57,5 +77,4 @@ public enum ColorHelper {
         }
         return color;
     }
-
 }

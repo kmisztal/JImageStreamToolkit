@@ -140,7 +140,11 @@ public class Image implements Cloneable {
     }
 
     public void setRGB(int x, int y, int r, int g, int b) {
-        bufferedImage.setRGB(x, y, new Color(r, g, b).getRGB());
+        bufferedImage.setRGB(x, y, ColorHelper.getRGB(r, g, b));
+    }
+
+    public void setRGB(int x, int y, int r, int g, int b, int a) {
+        bufferedImage.setRGB(x, y, ColorHelper.getRGB(r, g, b, a));
     }
 
     public int getRed(final int x, final int y) {
