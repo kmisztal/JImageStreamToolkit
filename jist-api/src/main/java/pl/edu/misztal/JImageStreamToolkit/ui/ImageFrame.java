@@ -9,15 +9,14 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public final class ImageFrame extends JDialog {
+public final class ImageFrame extends JFrame {
 
     String core_title;
     FilenameFilter fileNameFilter;
     ResizableImagePanel imageView;
 
     public ImageFrame(String title) {
-        super((Window) null);
-        setModal(true);
+        super(title);
         LookAndFeel.doIt();
         EscapeClose.doIt(this);
 
@@ -88,12 +87,5 @@ public final class ImageFrame extends JDialog {
 
     public void display() {
         this.setVisible(true);
-        this.setVisible(false);
     }
-
-    public void display(boolean modal) {
-        this.setModal(modal);
-        this.setVisible(true);
-    }
-
 }

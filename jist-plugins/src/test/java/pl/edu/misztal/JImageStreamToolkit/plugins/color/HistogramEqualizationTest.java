@@ -5,6 +5,7 @@ import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.ui.ImageFrame;
 import pl.edu.misztal.JImageStreamToolkit.ui.histogram.HistogramGUI;
 
+import java.awt.*;
 import java.io.File;
 
 /**
@@ -17,11 +18,19 @@ public class HistogramEqualizationTest {
         File file = new File(classLoader.getResource("hist.png").getFile());
 
         Image image = new Image(file);
-        new ImageFrame(image).display(false);
-        new HistogramGUI(image.clone(), false).display(false);
-        new HistogramEqualization().process(image);
-        new ImageFrame(image).display(false);
+        new ImageFrame("Original", image).display();
         new HistogramGUI(image.clone(), false).display();
+        new HistogramEqualization().process(image);
+
+        Graphics2D g = image.getBufferedImage().createGraphics();
+        g.setColor(Color.RED);
+        g.fillOval(100, 100, 20, 20);
+        g.dispose();
+
+        new ImageFrame("After", image).display();
+        new HistogramGUI(image.clone(), false).display();
+
+        System.in.read();
     }
 
 }

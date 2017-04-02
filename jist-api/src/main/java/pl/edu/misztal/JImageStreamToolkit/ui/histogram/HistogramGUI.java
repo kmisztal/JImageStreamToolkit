@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by krzys on 31.03.2017.
  */
-public class HistogramGUI extends JDialog {
+public class HistogramGUI extends JFrame {
 
     private final Histogram hist;
 
@@ -52,7 +52,7 @@ public class HistogramGUI extends JDialog {
 
         popup.add(menuItem);
 
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JScrollPane sp = new JScrollPane();
         JPanel p = new JPanel();
         if (!grayscale) {
@@ -89,7 +89,6 @@ public class HistogramGUI extends JDialog {
         add(sp);
         pack();
         setLocationRelativeTo(null);
-//        setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -149,12 +148,6 @@ public class HistogramGUI extends JDialog {
     }
 
     public void display() {
-        this.setVisible(true);
-        this.setVisible(false);
-    }
-
-    public void display(boolean modal) {
-        this.setModal(modal);
         this.setVisible(true);
     }
 
