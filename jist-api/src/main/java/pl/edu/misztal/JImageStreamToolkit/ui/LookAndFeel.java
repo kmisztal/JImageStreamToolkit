@@ -7,7 +7,7 @@ public class LookAndFeel {
     /**
      * ustawia look and feel systemu dla aplikacji okienkowej
      */
-    static void doIt() {
+    public static void doIt() {
         try {
             // Set System L&F
             UIManager.setLookAndFeel(

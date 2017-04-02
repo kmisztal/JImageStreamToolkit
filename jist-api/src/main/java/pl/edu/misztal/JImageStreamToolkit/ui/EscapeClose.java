@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-class EscapeClose {
+public class EscapeClose {
 
-    static void doIt(final JFrame frame) {
+    public static void doIt(final JFrame frame) {
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
             // close the frame when the user presses escape
@@ -19,7 +19,7 @@ class EscapeClose {
         frame.getRootPane().getActionMap().put("ESCAPE", escapeAction);
     }
 
-    static void doIt(final JDialog frame) {
+    public static void doIt(final JDialog frame) {
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
             // close the frame when the user presses escape
