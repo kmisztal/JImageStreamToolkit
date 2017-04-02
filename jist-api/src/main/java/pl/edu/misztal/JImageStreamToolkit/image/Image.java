@@ -1,8 +1,9 @@
 package pl.edu.misztal.JImageStreamToolkit.image;
 
 import pl.edu.misztal.JImageStreamToolkit.utils.ColorHelper;
-import pl.edu.misztal.JImageStreamToolkit.utils.IOHelper;
+import pl.edu.misztal.JImageStreamToolkit.utils.filereaders.IOHelper;
 import pl.edu.uj.JImageStream.api.ImageStream;
+import pl.edu.uj.JImageStream.api.core.Collector;
 import pl.edu.uj.JImageStream.model.StreamableImage;
 
 import java.awt.*;
@@ -59,6 +60,10 @@ public class Image implements Cloneable {
         g.drawImage(source, 0, 0, null);
         g.dispose();
         return b;
+    }
+
+    public static Collector<Image> getCollector() {
+        return new ImageCollector();
     }
 
     public BufferedImage getBufferedImage() {

@@ -2,7 +2,7 @@ package pl.edu.misztal.JImageStreamToolkit.ui;
 
 import javax.swing.*;
 
-class LookAndFeel {
+public class LookAndFeel {
 
     /**
      * ustawia look and feel systemu dla aplikacji okienkowej

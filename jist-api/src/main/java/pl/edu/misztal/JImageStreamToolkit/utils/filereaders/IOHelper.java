@@ -1,4 +1,4 @@
-package pl.edu.misztal.JImageStreamToolkit.utils;
+package pl.edu.misztal.JImageStreamToolkit.utils.filereaders;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
