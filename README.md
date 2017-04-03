@@ -6,3 +6,15 @@ Currently available plugins
 - binarization
     - Binarize
     - OtsuBinarization
+- color
+    - ColorNegate
+    - GrayScale
+    - HistogramEqualization
+- morphology
+    - Dilatation
+    - Erosion
+- statistical
+    - MedianFilter
+- transformations
+    - ImageCrop
+    - ImageRotate
