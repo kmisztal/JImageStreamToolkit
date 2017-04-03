@@ -132,4 +132,10 @@ public class Attributes implements Cloneable {
         return ret.toString();
     }
 
+    public void update(Attributes attributes) {
+        String[] keys = attributes.hashAttributes.keySet().toArray(new String[0]);
+        for (String key : keys) {
+            set(key, attributes.get(key));
+        }
+    }
 }

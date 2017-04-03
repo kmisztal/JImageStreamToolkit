@@ -93,4 +93,8 @@ public abstract class Plugin {
         this.attributes = attributes;
     }
 
+    public void updateAttributes(Attributes attributes) {
+        this.attributes.update(attributes);
+    }
+
 }
