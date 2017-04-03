@@ -57,7 +57,10 @@ public abstract class Plugin {
     public final void apply(
             Image imgInAndOut
     ) {
+        Instant startTime = Instant.now();
+        logger.info(this.getClass() + " starting filter");
         process(imgInAndOut, imgInAndOut);
+        logger.info("filter {} has ended, time {} ms", this.getClass(), ChronoUnit.MILLIS.between(startTime, Instant.now()));
     }
 
     public Object getAttribute(String key) {
