@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class MultiPlugin extends Plugin {
     private ArrayList<Plugin> plugins = new ArrayList<>();
 
+    public MultiPlugin() {
+    }
+
     public MultiPlugin(Plugin plugin) {
         plugins.add(plugin);
     }
