@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class MultiPlugin extends Plugin {
     private ArrayList<Plugin> plugins = new ArrayList<>();
+    private ArrayList<Image> images = new ArrayList<>();
+    private boolean rememberImages = true;
 
     public MultiPlugin() {
     }
@@ -13,6 +15,10 @@ public class MultiPlugin extends Plugin {
     public void add(Plugin plugin) {
         plugin.setAttributes(this.getAttributes());
         this.plugins.add(plugin);
+    }
+
+    public void setRememberImages(boolean rememberImages) {
+        this.rememberImages = rememberImages;
     }
 
     /**
@@ -34,10 +40,17 @@ public class MultiPlugin extends Plugin {
 
     @Override
     public void process(Image imgIn, Image imgOut) {
-        Image tmp = imgIn.clone();
+        Image currentImage = imgIn.clone();
+        addImage(currentImage);
         for (Plugin p : plugins) {
-            p.process(tmp);
+            p.process(currentImage);
+            addImage(currentImage);
         }
-        imgOut.setBufferedImage(tmp.getBufferedImage());
+        imgOut.setBufferedImage(currentImage.getBufferedImage());
+    }
+
+    private void addImage(Image image) {
+        if (rememberImages)
+            this.images.add(image.clone());
     }
 }
