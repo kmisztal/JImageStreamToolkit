@@ -1,4 +1,4 @@
-package pl.edu.misztal.JImageStreamToolkit.executors.utils;
+package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
