@@ -1,4 +1,4 @@
-package pipelines;
+package pl.edu.misztal.JImageStreamToolkit.executors;
 
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;

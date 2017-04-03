@@ -1,14 +1,13 @@
-package pipelines;
+package pl.edu.misztal.JImageStreamToolkit.plugin;
 
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
-import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 import java.util.ArrayList;
 
-public class Pipeline extends Plugin {
+public class MultiPlugin extends Plugin {
     private ArrayList<Plugin> plugins = new ArrayList<>();
 
-    public Pipeline(Plugin plugin) {
+    public MultiPlugin(Plugin plugin) {
         plugins.add(plugin);
     }
 

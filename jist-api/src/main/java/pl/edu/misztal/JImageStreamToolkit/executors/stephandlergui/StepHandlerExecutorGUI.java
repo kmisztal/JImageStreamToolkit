@@ -1,5 +1,7 @@
-package pipelines;
+package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
 
+import pl.edu.misztal.JImageStreamToolkit.executors.utils.Pair;
+import pl.edu.misztal.JImageStreamToolkit.executors.utils.ResizableImagePanel;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 import pl.edu.misztal.JImageStreamToolkit.ui.EscapeClose;

@@ -1,4 +1,4 @@
-package pipelines;
+package pl.edu.misztal.JImageStreamToolkit.executors.utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
