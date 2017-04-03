@@ -1,4 +1,4 @@
-![JImageStreamToolkit Logo](https://github.com/kmisztal/JImageStreamToolkit/master/JImageStreamToolkit_logo.png)
+![JImageStreamToolkit Logo](https://github.com/kmisztal/JImageStreamToolkit/blob/master/JImageStreamToolkit_logo.png)
 
 JImageStreamToolkit is a framework to quickly process Image files.
 
