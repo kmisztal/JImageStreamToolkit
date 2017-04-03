@@ -24,7 +24,7 @@ public class ImageRotate extends Plugin {
     }
 
     @Override
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         BufferedImage bufferedImage = imgIn.getCopyOfBufferedImage();
 
         int origin_x_local;

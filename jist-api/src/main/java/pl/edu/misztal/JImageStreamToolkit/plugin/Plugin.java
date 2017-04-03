@@ -1,8 +1,14 @@
 package pl.edu.misztal.JImageStreamToolkit.plugin;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
 public abstract class Plugin {
+    protected final Logger logger = LogManager.getLogger(this.getClass());
     private Attributes attributes = new Attributes();
 
     /**
@@ -11,7 +17,7 @@ public abstract class Plugin {
      * @param imgIn  input image.
      * @param imgOut output image
      */
-    public abstract void process(
+    protected abstract void process(
             Image imgIn,
             Image imgOut
     );
@@ -19,9 +25,36 @@ public abstract class Plugin {
     /**
      * Executes the algorithm.
      *
+     * @param imgIn  input image.
+     * @param imgOut output image
+     */
+    public void apply(
+            Image imgIn,
+            Image imgOut
+    ) {
+        Instant startTime = Instant.now();
+        logger.info(this.getClass() + " starting filter");
+        process(imgIn, imgOut);
+        logger.info("filter {} has ended, time {} ms", this.getClass(), ChronoUnit.MILLIS.between(startTime, Instant.now()));
+    }
+
+    /**
+     * Executes the algorithm.
+     *
      * @param imgInAndOut input and output image.
      */
-    public final void process(
+    protected final void process(
+            Image imgInAndOut
+    ) {
+        process(imgInAndOut, imgInAndOut);
+    }
+
+    /**
+     * Executes the algorithm.
+     *
+     * @param imgInAndOut input and output image.
+     */
+    public final void apply(
             Image imgInAndOut
     ) {
         process(imgInAndOut, imgInAndOut);

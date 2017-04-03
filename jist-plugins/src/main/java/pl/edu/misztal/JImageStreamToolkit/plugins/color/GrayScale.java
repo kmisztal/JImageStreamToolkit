@@ -4,7 +4,7 @@ import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 public class GrayScale extends Plugin {
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
                         .apply(new pl.edu.uj.JImageStream.filters.color.GrayScaleFilter())

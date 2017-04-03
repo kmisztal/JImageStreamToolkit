@@ -31,7 +31,7 @@ public class ImageCrop extends Plugin {
     }
 
     @Override
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(imgIn.parallelStream().apply(new Filter() {
 
             @Override

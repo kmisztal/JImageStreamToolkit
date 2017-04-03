@@ -62,7 +62,7 @@ public class StepHandlerExecutor extends Executor {
         getPlugins().stream().forEach((p) -> {
             te.startJob(p.getName());
 
-            p.process(currentImage);
+            p.apply(currentImage);
             imageList.addImage(currentImage.clone(), p);
             progress.increment();
             te.endJob(true);

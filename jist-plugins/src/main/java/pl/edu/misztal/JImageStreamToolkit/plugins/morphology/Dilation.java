@@ -20,7 +20,7 @@ public class Dilation extends Plugin {
     public Dilation() {
     }
 
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
                         .apply(new DilationFilter(this.kernelSize, this.kernelShape))

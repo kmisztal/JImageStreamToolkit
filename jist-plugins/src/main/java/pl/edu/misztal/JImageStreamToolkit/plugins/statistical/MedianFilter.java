@@ -15,7 +15,8 @@ public class MedianFilter extends Plugin {
         this.kernelSize = 3;
     }
 
-    public void process(Image imgIn, Image imgOut) {
+    @Override
+    protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
                         .apply(new pl.edu.uj.JImageStream.filters.statistical.MedianFilter(this.kernelSize))

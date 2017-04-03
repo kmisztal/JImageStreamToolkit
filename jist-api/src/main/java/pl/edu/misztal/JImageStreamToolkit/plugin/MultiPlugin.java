@@ -39,11 +39,11 @@ public class MultiPlugin extends Plugin {
     }
 
     @Override
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         Image currentImage = imgIn.clone();
         addImage(currentImage);
         for (Plugin p : plugins) {
-            p.process(currentImage);
+            p.apply(currentImage);
             addImage(currentImage);
         }
         imgOut.setBufferedImage(currentImage.getBufferedImage());

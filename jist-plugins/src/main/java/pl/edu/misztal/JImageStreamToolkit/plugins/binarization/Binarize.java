@@ -24,7 +24,7 @@ public class Binarize extends Plugin {
     }
 
     @Override
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         for (int jx = 0; jx < imgIn.getWidth(); ++jx) {
             for (int iy = 0; iy < imgIn.getHeight(); ++iy) {
                 if (imgIn.getRed(jx, iy) > this.threshold) {

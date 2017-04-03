@@ -5,7 +5,7 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 public class ColorNegate extends Plugin {
     @Override
-    public void process(Image imgIn, Image imgOut) {
+    protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
                         .apply(new pl.edu.uj.JImageStream.filters.color.InvertFilter())

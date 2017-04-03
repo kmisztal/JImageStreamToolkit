@@ -8,9 +8,6 @@ import pl.edu.misztal.JImageStreamToolkit.ui.histogram.HistogramGUI;
 import java.awt.*;
 import java.io.File;
 
-/**
- * Created by krzys on 02.04.2017.
- */
 public class HistogramEqualizationTest {
     @Test
     public void process() throws Exception {
@@ -20,7 +17,7 @@ public class HistogramEqualizationTest {
         Image image = new Image(file);
         new ImageFrame("Original", image).display();
         new HistogramGUI(image.clone(), false).display();
-        new HistogramEqualization().process(image);
+        new HistogramEqualization().apply(image);
 
         Graphics2D g = image.getBufferedImage().createGraphics();
         g.setColor(Color.RED);
