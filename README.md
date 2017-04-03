@@ -4,5 +4,5 @@ JImageStreamToolkit is a framework to quickly process Image files.
 
 Currently available plugins
 - binarization
--- Binarize
--- OtsuBinarization
+    - Binarize
+    - OtsuBinarization
