@@ -1,10 +1,11 @@
 package pl.edu.misztal.JImageStreamToolkit.plugins.color;
 
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
+import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 import pl.edu.uj.JImageStream.collectors.BufferedImageCollector;
 import pl.edu.uj.JImageStream.filters.statistical.CLAHEFilter;
 
-public class CLAHistogramEqualization {
+public class CLAHistogramEqualization extends Plugin {
 
     private int BINS = 255;
     private int BLOCK_RADIUS = 63;
