@@ -5,10 +5,21 @@ import pl.edu.uj.JImageStream.collectors.BufferedImageCollector;
 import pl.edu.uj.JImageStream.filters.statistical.CLAHEFilter;
 
 public class CLAHistogramEqualization {
+
+    private int BINS = 255;
+    private int BLOCK_RADIUS = 63;
+    private double SLOPE = 6.0;
+
+    public CLAHistogramEqualization(double slope, int blockRadius, int bins) {
+        this.SLOPE = slope;
+        this.BLOCK_RADIUS = blockRadius;
+        this.BINS = bins;
+    }
+
     protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
-                        .apply(new CLAHEFilter())
+                        .apply(new CLAHEFilter(this.SLOPE, this.BLOCK_RADIUS, this.BINS))
                         .collect(new BufferedImageCollector())
         );
     }
