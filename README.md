@@ -5,16 +5,17 @@ JImageStreamToolkit is a framework to quickly process Image files.
 Currently available plugins
 - binarization
     - Binarize
-    - OtsuBinarization
+    - OtsuBinarization (adapter to JImageStream)
 - color
-    - ColorNegate
-    - GrayScale
-    - HistogramEqualization
+    - ColorNegate (adapter to JImageStream)
+    - GrayScale (adapter to JImageStream)
+    - HistogramEqualization (adapter to JImageStream)
+    - CLAHistogramEqualization: (adapter to JImageStream implementation of [Contrast Limited Adaptive Histogram Equalization](https://en.wikipedia.org/wiki/Adaptive_histogram_equalization))
 - morphology
-    - Dilatation
-    - Erosion
+    - Dilatation (adapter to JImageStream)
+    - Erosion (adapter to JImageStream)
 - statistical
-    - MedianFilter
+    - MedianFilter (adapter to JImageStream)
 - transformations
     - ImageCrop
     - ImageRotate
