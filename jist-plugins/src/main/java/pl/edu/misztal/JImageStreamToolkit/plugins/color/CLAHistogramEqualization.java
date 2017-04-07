@@ -10,6 +10,9 @@ public class CLAHistogramEqualization {
     private int BLOCK_RADIUS = 63;
     private double SLOPE = 6.0;
 
+    public CLAHistogramEqualization() {
+    }
+
     public CLAHistogramEqualization(double slope, int blockRadius, int bins) {
         this.SLOPE = slope;
         this.BLOCK_RADIUS = blockRadius;
