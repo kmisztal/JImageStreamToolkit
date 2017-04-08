@@ -53,4 +53,12 @@ public class MultiPlugin extends Plugin {
         if (rememberImages)
             this.images.add(image.clone());
     }
+
+    public ArrayList<Plugin> getPlugins() {
+        return plugins;
+    }
+
+    public ArrayList<Image> getImages() {
+        return images;
+    }
 }

@@ -3,6 +3,7 @@ package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
 import pl.edu.misztal.JImageStreamToolkit.executors.Executor;
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.TimeExecution;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
+import pl.edu.misztal.JImageStreamToolkit.plugin.MultiPlugin;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 import java.io.File;
@@ -60,12 +61,26 @@ public class StepHandlerExecutor extends Executor {
         });
 
         getPlugins().stream().forEach((p) -> {
-            te.startJob(p.getName());
+            if (p instanceof MultiPlugin) {
+                MultiPlugin mp = (MultiPlugin) p;
 
-            p.apply(currentImage);
-            imageList.addImage(currentImage.clone(), p);
-            progress.increment();
-            te.endJob(true);
+                mp.getPlugins().stream().forEach((pp) -> {
+                    //TODO: make it nicer
+                    te.startJob(pp.getName());
+
+                    pp.apply(currentImage);
+                    imageList.addImage(currentImage.clone(), pp);
+                    progress.increment();
+                    te.endJob(true);
+                });
+            } else {
+                te.startJob(p.getName());
+
+                p.apply(currentImage);
+                imageList.addImage(currentImage.clone(), p);
+                progress.increment();
+                te.endJob(true);
+            }
         });
 
 
