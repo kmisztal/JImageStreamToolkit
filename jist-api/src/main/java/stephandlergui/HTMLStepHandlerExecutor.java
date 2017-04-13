@@ -1,6 +1,7 @@
-package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
+package stephandlergui;
 
 import pl.edu.misztal.JImageStreamToolkit.executors.Executor;
+import pl.edu.misztal.JImageStreamToolkit.executors.utils.Pair;
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.TimeExecution;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import pl.edu.misztal.JImageStreamToolkit.plugin.MultiPlugin;
@@ -8,42 +9,40 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class StepHandlerExecutor extends Executor {
+public class HTMLStepHandlerExecutor extends Executor {
     private String title;
-    private StepHandlerExecutorGUI imageList;
+    private ArrayList<Pair<Image, Plugin>> imageList;
     private ProcessingProgress progress;
-    private boolean fullscrean = false;
 
-    public StepHandlerExecutor(String filename) throws IOException {
+    public HTMLStepHandlerExecutor(String filename) throws IOException {
         super(new File(filename));
     }
 
-    public StepHandlerExecutor(String filename, String title) throws IOException {
+    public HTMLStepHandlerExecutor(String filename, String title) throws IOException {
         super(new File(filename));
         this.title = title;
     }
 
-    public StepHandlerExecutor(File file) throws IOException {
+    public HTMLStepHandlerExecutor(File file) throws IOException {
         super(file);
     }
 
     @Override
     public void executeCase() {
         if (imageList == null) {
-            imageList = new StepHandlerExecutorGUI(title, fullscrean);
-            progress = new ProcessingProgress(imageList, getPlugins().size());
-            imageList.setVisible(true);
+            imageList = new ArrayList<>();
+            progress = new ProcessingProgress(null, getPlugins().size());
         }
-
 
         TimeExecution te = new TimeExecution();
         te.startEvent();
 
-        imageList.addImage(currentImage.clone(), new Plugin() {
+        imageList.add(new Pair<>(currentImage.clone(), new Plugin() {
 
             @Override
-            public void process(Image imgIn, Image imgOut) {
+            protected void process(Image imgIn, Image imgOut) {
                 //intentionally empty
             }
 
@@ -56,9 +55,7 @@ public class StepHandlerExecutor extends Executor {
             public String getName() {
                 return getInfo();
             }
-
-
-        });
+        }));
 
         getPlugins().stream().forEach((p) -> {
             if (p instanceof MultiPlugin) {
@@ -69,7 +66,7 @@ public class StepHandlerExecutor extends Executor {
                     te.startJob(pp.getName());
 
                     pp.apply(currentImage);
-                    imageList.addImage(currentImage.clone(), pp);
+                    imageList.add(new Pair<>(currentImage.clone(), pp));
                     progress.increment();
                     te.endJob(true);
                 });
@@ -77,7 +74,7 @@ public class StepHandlerExecutor extends Executor {
                 te.startJob(p.getName());
 
                 p.apply(currentImage);
-                imageList.addImage(currentImage.clone(), p);
+                imageList.add(new Pair<>(currentImage.clone(), p));
                 progress.increment();
                 te.endJob(true);
             }
@@ -86,10 +83,5 @@ public class StepHandlerExecutor extends Executor {
 
         te.stopEvent();
         te.printEventExecutionTime();
-    }
-
-    public StepHandlerExecutor setFullscrean(boolean fullscrean) {
-        this.fullscrean = fullscrean;
-        return this;
     }
 }

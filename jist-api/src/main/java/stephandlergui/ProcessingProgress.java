@@ -1,4 +1,4 @@
-package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
+package stephandlergui;
 
 
 import javax.swing.*;

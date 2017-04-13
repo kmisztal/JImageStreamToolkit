@@ -1,4 +1,4 @@
-package pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui;
+package stephandlergui;
 
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.Pair;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;

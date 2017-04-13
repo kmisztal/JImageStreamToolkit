@@ -1,9 +1,9 @@
 package pl.edu.misztal.JImageStreamToolkit.plugins.pipelines;
 
-import pl.edu.misztal.JImageStreamToolkit.executors.stephandlergui.StepHandlerExecutor;
 import pl.edu.misztal.JImageStreamToolkit.plugin.MultiPlugin;
 import pl.edu.misztal.JImageStreamToolkit.plugins.binarization.OtsuBinarization;
 import pl.edu.misztal.JImageStreamToolkit.plugins.color.GrayScale;
+import stephandlergui.StepHandlerExecutor;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class StepHandlerExecutorTest {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("lena.png").getFile());
         StepHandlerExecutor executor = new StepHandlerExecutor(file);
-
+        executor.setFullscrean(true);
         executor.add(new GrayScale());
         executor.execute();
 
