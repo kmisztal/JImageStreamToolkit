@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 
-public class Attributes implements Cloneable {
-    private final LinkedHashMap<String, Object> hashAttributes;
+public class Attributes extends LinkedHashMap<String, Object> implements Cloneable {
+
 
     /**
      * Constructor
      */
     public Attributes() {
-        hashAttributes = new LinkedHashMap<>();
+        super();
     }
 
     /**
@@ -22,7 +22,7 @@ public class Attributes implements Cloneable {
      * @param value attribute value.
      */
     public void set(String name, Object value) {
-        hashAttributes.put(name, value);
+        put(name, value);
     }
 
     /**
@@ -32,18 +32,8 @@ public class Attributes implements Cloneable {
      */
     public void set(Object... params) {
         for (int i = 0; i < params.length; i += 2) {
-            hashAttributes.put((String) params[i], params[i + 1]);
+            put((String) params[i], params[i + 1]);
         }
-    }
-
-    /**
-     * Get an attribute by its name.
-     *
-     * @param name attribute's name.
-     * @return the specified attribute as an Object.
-     */
-    public Object get(String name) {
-        return hashAttributes.get(name);
     }
 
     public Object get(String name, Object defaultValue) {
@@ -60,11 +50,11 @@ public class Attributes implements Cloneable {
      * @return string array with all attributes' name and value.
      */
     public String[] toStringArray() {
-        String attrs[] = new String[hashAttributes.size() * 2];
-        String[] keys = hashAttributes.keySet().toArray(new String[0]);
+        String attrs[] = new String[size() * 2];
+        String[] keys = keySet().toArray(new String[0]);
         for (int x = 0; x < keys.length; x++) {
             attrs[(x * 2)] = keys[x];
-            attrs[(x * 2) + 1] = "" + arrayString(hashAttributes.get(keys[x]));
+            attrs[(x * 2) + 1] = "" + arrayString(get(keys[x]));
         }
         return attrs;
     }
@@ -83,7 +73,7 @@ public class Attributes implements Cloneable {
      * @return
      */
     public Object[] getValues() {
-        Object o[] = hashAttributes.entrySet().toArray(new Object[0]);
+        Object o[] = entrySet().toArray(new Object[0]);
         return o;
     }
 
@@ -95,24 +85,24 @@ public class Attributes implements Cloneable {
     @Override
     public Attributes clone() {
         Attributes attrs = new Attributes();
-        String[] keys = hashAttributes.keySet().toArray(new String[0]);
+        String[] keys = keySet().toArray(new String[0]);
         for (String key : keys) {
-            attrs.set(key, hashAttributes.get(key));
+            attrs.set(key, get(key));
         }
         return attrs;
     }
 
     public boolean isEmpty() {
-        return hashAttributes.isEmpty();
+        return isEmpty();
     }
 
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
 
-        for (String key : hashAttributes.keySet()) {
+        for (String key : keySet()) {
             ret.append(key).append(" : ");
-            Object o = hashAttributes.get(key);
+            Object o = get(key);
             if (o instanceof Number) {
                 ret.append(o).append("\n");
             } else if (o instanceof Point) {
@@ -133,7 +123,7 @@ public class Attributes implements Cloneable {
     }
 
     public void update(Attributes attributes) {
-        String[] keys = attributes.hashAttributes.keySet().toArray(new String[0]);
+        String[] keys = attributes.keySet().toArray(new String[0]);
         for (String key : keys) {
             set(key, attributes.get(key));
         }

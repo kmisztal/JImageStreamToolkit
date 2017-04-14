@@ -2,6 +2,7 @@ package pl.edu.misztal.JImageStreamToolkit.executors;
 
 import org.junit.Test;
 import pl.edu.misztal.JImageStreamToolkit.executors.html.HTMLExecutor;
+import pl.edu.misztal.JImageStreamToolkit.plugins.binarization.OtsuBinarization;
 import pl.edu.misztal.JImageStreamToolkit.plugins.color.GrayScale;
 
 import java.io.File;
@@ -16,7 +17,10 @@ public class HTMLExecutorTest {
         File file = new File(classLoader.getResource("lena.png").getFile());
         HTMLExecutor executor = new HTMLExecutor(file);
         executor.add(new GrayScale());
+        executor.add(new OtsuBinarization());
         executor.execute();
+
+        executor.save("e:\\github\\JImageStreamToolkit\\results");
 
 //        System.in.read();
     }

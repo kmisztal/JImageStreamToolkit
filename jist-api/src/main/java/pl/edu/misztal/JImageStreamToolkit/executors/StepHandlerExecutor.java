@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class StepHandlerExecutor extends Executor {
-    private ArrayList<Pair<Images, Plugin>> imageList;
+    protected ArrayList<Pair<Images, Plugin>> imageList;
     private ProcessingProgress progress;
 
     public StepHandlerExecutor(File... files) throws IOException {

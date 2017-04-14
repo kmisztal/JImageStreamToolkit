@@ -104,3 +104,12 @@
   border-color: #ddd #ddd #ddd transparent;
   *border-left-color: #ffffff;
 }
+
+img{
+    max-width: 600px;
+    max-height: 500px;
+}
+
+dl dt {
+    white-space: normal;
+}

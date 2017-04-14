@@ -29,16 +29,19 @@ public class Images extends ArrayList<Image> implements Cloneable {
         }
     }
 
-    public void save(String filename, String suffix) {
+    public String[] save(String filename, String suffix) {
         suffix = suffix.startsWith(".") ? suffix : "." + suffix;
         if (this.size() == 1) {
             this.get(0).save(filename + suffix);
+            return new String[]{filename + suffix};
         } else {
             int it = 0;
-
+            String[] ret = new String[this.size()];
             for (Image i : this) {
-                i.save(filename + String.format("_%3d", it++) + suffix);
+                ret[it] = filename + String.format("_%03d", it) + suffix;
+                i.save(ret[it++]);
             }
+            return ret;
         }
     }
 
