@@ -3,6 +3,7 @@ package pl.edu.misztal.JImageStreamToolkit.plugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
+import pl.edu.misztal.JImageStreamToolkit.image.Images;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -97,4 +98,7 @@ public abstract class Plugin {
         this.attributes.update(attributes);
     }
 
+    public void apply(Images images) {
+        images.forEach(this::apply);
+    }
 }

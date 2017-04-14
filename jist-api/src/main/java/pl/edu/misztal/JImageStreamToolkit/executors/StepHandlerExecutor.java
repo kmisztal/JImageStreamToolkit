@@ -1,9 +1,10 @@
-package stephandlergui;
+package pl.edu.misztal.JImageStreamToolkit.executors;
 
-import pl.edu.misztal.JImageStreamToolkit.executors.Executor;
+import pl.edu.misztal.JImageStreamToolkit.executors.gui.ProcessingProgress;
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.Pair;
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.TimeExecution;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
+import pl.edu.misztal.JImageStreamToolkit.image.Images;
 import pl.edu.misztal.JImageStreamToolkit.plugin.MultiPlugin;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
@@ -11,22 +12,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HTMLStepHandlerExecutor extends Executor {
-    private String title;
-    private ArrayList<Pair<Image, Plugin>> imageList;
+public class StepHandlerExecutor extends Executor {
+    private ArrayList<Pair<Images, Plugin>> imageList;
     private ProcessingProgress progress;
 
-    public HTMLStepHandlerExecutor(String filename) throws IOException {
-        super(new File(filename));
+    public StepHandlerExecutor(File... files) throws IOException {
+        super(files);
     }
 
-    public HTMLStepHandlerExecutor(String filename, String title) throws IOException {
-        super(new File(filename));
-        this.title = title;
-    }
-
-    public HTMLStepHandlerExecutor(File file) throws IOException {
-        super(file);
+    public StepHandlerExecutor(Image... img) {
+        super(img);
     }
 
     @Override
@@ -39,7 +34,7 @@ public class HTMLStepHandlerExecutor extends Executor {
         TimeExecution te = new TimeExecution();
         te.startEvent();
 
-        imageList.add(new Pair<>(currentImage.clone(), new Plugin() {
+        imageList.add(new Pair<>(currentImages.clone(), new Plugin() {
 
             @Override
             protected void process(Image imgIn, Image imgOut) {
@@ -57,31 +52,31 @@ public class HTMLStepHandlerExecutor extends Executor {
             }
         }));
 
-        getPlugins().stream().forEach((p) -> {
+        getPlugins().forEach((p) -> {
             if (p instanceof MultiPlugin) {
                 MultiPlugin mp = (MultiPlugin) p;
 
-                mp.getPlugins().stream().forEach((pp) -> {
+                mp.getPlugins().forEach((pp) -> {
                     //TODO: make it nicer
                     te.startJob(pp.getName());
 
-                    pp.apply(currentImage);
-                    imageList.add(new Pair<>(currentImage.clone(), pp));
+                    pp.apply(currentImages);
+                    imageList.add(new Pair<>(currentImages.clone(), pp));
                     progress.increment();
                     te.endJob(true);
                 });
             } else {
                 te.startJob(p.getName());
 
-                p.apply(currentImage);
-                imageList.add(new Pair<>(currentImage.clone(), p));
+                p.apply(currentImages);
+                imageList.add(new Pair<>(currentImages.clone(), p));
                 progress.increment();
                 te.endJob(true);
             }
         });
 
-
         te.stopEvent();
         te.printEventExecutionTime();
     }
 }
+

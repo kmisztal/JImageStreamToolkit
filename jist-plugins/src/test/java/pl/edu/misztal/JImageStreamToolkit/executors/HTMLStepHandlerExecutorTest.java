@@ -1,8 +1,8 @@
 package pl.edu.misztal.JImageStreamToolkit.executors;
 
 import org.junit.Test;
+import pl.edu.misztal.JImageStreamToolkit.executors.html.HTMLStepHandlerExecutor;
 import pl.edu.misztal.JImageStreamToolkit.plugins.color.GrayScale;
-import stephandlergui.HTMLStepHandlerExecutor;
 
 import java.io.File;
 

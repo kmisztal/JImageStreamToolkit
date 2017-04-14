@@ -27,7 +27,7 @@ public class HistogramEqualizationTest {
         new ImageFrame("After", image).display();
         new HistogramGUI(image.clone(), false).display();
 
-        System.in.read();
+//        System.in.read();
     }
 
 }

@@ -1,30 +1,28 @@
 package pl.edu.misztal.JImageStreamToolkit.executors;
 
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
+import pl.edu.misztal.JImageStreamToolkit.image.Images;
 import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Executor {
-
-    protected final Image originalImage;
-    protected Image currentImage;
-    protected int currentPlugin = 0;
+    private final Images originalImages = new Images();
+    protected Images currentImages = new Images();
+    private int currentPlugin = 0;
 
     private ArrayList<Plugin> plugins = new ArrayList<>();
 
-    public Executor(File file) throws IOException {
-        originalImage = new Image(file);
-        currentImage = originalImage.clone();
+    public Executor(File... files) throws IOException {
+        originalImages.addAll(files);
     }
 
-
-    public Executor(Image img) {
-        originalImage = img.clone();
-        currentImage = originalImage.clone();
+    public Executor(Image... img) {
+        originalImages.addAll(img);
     }
 
     /**
@@ -34,6 +32,10 @@ public abstract class Executor {
      */
     public void add(Plugin plugin) {
         plugins.add(plugin);
+    }
+
+    public void add(Plugin... plugin) {
+        Collections.addAll(plugins, plugin);
     }
 
     /**
@@ -55,6 +57,7 @@ public abstract class Executor {
     public abstract void executeCase();
 
     public final void execute() {
+        currentImages.fillWithCopy(originalImages);
         executeCase();
         currentPlugin = plugins.size();
     }
@@ -64,22 +67,22 @@ public abstract class Executor {
      *
      * @param filename - destination file name
      */
-    public void save(String filename) {
-        currentImage.save(filename);
+    public void save(String filename, String suffix) {
+        currentImages.save(filename, suffix);
     }
 
     /**
      * @return original image
      */
-    public Image getOriginalImage() {
-        return originalImage;
+    public Images getOriginalImage() {
+        return originalImages;
     }
 
     /**
      * @return result image after applying all plugins
      */
-    public Image getResultImage() {
-        return currentImage;
+    public Images getResultImage() {
+        return currentImages;
     }
 
     /**

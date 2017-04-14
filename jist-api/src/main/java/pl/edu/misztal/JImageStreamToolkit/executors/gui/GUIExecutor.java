@@ -1,4 +1,4 @@
-package stephandlergui;
+package pl.edu.misztal.JImageStreamToolkit.executors.gui;
 
 import pl.edu.misztal.JImageStreamToolkit.executors.utils.Pair;
 import pl.edu.misztal.JImageStreamToolkit.image.Image;
@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public final class StepHandlerExecutorGUI extends JFrame {
+public final class GUIExecutor extends JFrame {
 
     final JList imageList;
     final JEditorPane info;
@@ -23,7 +23,7 @@ public final class StepHandlerExecutorGUI extends JFrame {
     DefaultListModel model;
     private JPanel gui;
 
-    public StepHandlerExecutorGUI(String title, boolean fullscrean) {
+    public GUIExecutor(String title, boolean fullscrean) {
         super(title == null ? "Step Handler Executor" : title);
         LookAndFeel.doIt();
         EscapeClose.doIt(this);
@@ -83,13 +83,13 @@ public final class StepHandlerExecutorGUI extends JFrame {
 
     }
 
-    private StepHandlerExecutorGUI() {
+    private GUIExecutor() {
         this(null, false);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            StepHandlerExecutorGUI imageList1 = new StepHandlerExecutorGUI();
+            GUIExecutor imageList1 = new GUIExecutor();
             imageList1.setVisible(true);
         });
     }
