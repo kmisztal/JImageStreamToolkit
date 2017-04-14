@@ -57,9 +57,19 @@ public abstract class Executor {
     public abstract void executeCase();
 
     public final void execute() {
+        preExecuteCase();
         currentImages.fillWithCopy(originalImages);
         executeCase();
         currentPlugin = plugins.size();
+        postExecuteCase();
+    }
+
+    protected void postExecuteCase() {
+
+    }
+
+    protected void preExecuteCase() {
+
     }
 
     /**
