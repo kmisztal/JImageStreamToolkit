@@ -38,7 +38,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
         ClassLoader classLoader = getClass().getClassLoader();
 
         //prepare html file
-        File file = new File(classLoader.getResource("example.html").getFile());
+        InputStream file = classLoader.getResourceAsStream("example.html");
 
         Document doc = Jsoup.parse(file, "UTF-8", "https://github.com/kmisztal/JImageStreamToolkit/");
 
@@ -100,7 +100,9 @@ public class HTMLExecutor extends StepHandlerExecutor {
                             Files.createDirectories(dest);
                         }
                     } else {
-                        Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+
+                        //here is error
+                        Files.copy(classLoader.getResourceAsStream(src.toString()), dest, StandardCopyOption.REPLACE_EXISTING);
                     }
                 } catch (IOException et) {
                     throw new RuntimeException("Failed to unzip file.", et);
