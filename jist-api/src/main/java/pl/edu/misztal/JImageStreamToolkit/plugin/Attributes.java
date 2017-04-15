@@ -92,10 +92,6 @@ public class Attributes extends LinkedHashMap<String, Object> implements Cloneab
         return attrs;
     }
 
-    public boolean isEmpty() {
-        return isEmpty();
-    }
-
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();

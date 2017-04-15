@@ -30,20 +30,17 @@ public class HTMLExecutor extends StepHandlerExecutor {
     }
 
     public void save(String destPath) throws IOException {
+        Path dest_ = new File(destPath).toPath();
+        if (Files.notExists(dest_)) {
+            Files.createDirectory(dest_);
+        }
+
         ClassLoader classLoader = getClass().getClassLoader();
 
         //prepare html file
         File file = new File(classLoader.getResource("example.html").getFile());
 
-        Document doc;
-        try {
-            doc = Jsoup.parse(file, "UTF-8", "https://github.com/kmisztal/JImageStreamToolkit/");
-        } catch (IOException e) {
-            doc = null;
-        }
-//        Element e = doc.select("#1").first();
-//
-//        e = doc.select("#ref1").first();
+        Document doc = Jsoup.parse(file, "UTF-8", "https://github.com/kmisztal/JImageStreamToolkit/");
 
         Path images = new File(destPath + File.separator + "images").toPath();
         if (Files.notExists(images)) {
@@ -65,13 +62,15 @@ public class HTMLExecutor extends StepHandlerExecutor {
                 }
                 ec.appendChild(e);
 
-
                 ec = doc.select("#tabs-content").first();
                 html = "<div class=\"tab-pane\" id=\"" + it + "\">" +
-                        "<img src=\"" + names[0] + "\" class=\"img-thumbnail\" alt=\"Responsive image\">" +
-                        "<hr>" +
-                        "<div class=\"well\">" + html(p.getValue().getAttributes()) + "</div>" +
-                        "</div>";
+                        "<img src=\"" + names[0].substring(destPath.length() + 1) + "\" class=\"img-thumbnail\" alt=\"Responsive image\">" +
+                        "<hr>";
+                if (!p.getValue().getAttributes().isEmpty()) {
+                    html +=
+                            "<div class=\"well\">" + html(p.getValue().getAttributes()) + "</div>";
+                }
+                html += "</div>";
                 e = Jsoup.parse(html).getElementsByTag("div").first();
                 if (it == 1) {
                     e.addClass("active");
@@ -80,7 +79,6 @@ public class HTMLExecutor extends StepHandlerExecutor {
             }
             ++it;
         }
-
 
         //save html file
         try (BufferedWriter htmlWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destPath + "\\results.html"), "UTF-8"))) {

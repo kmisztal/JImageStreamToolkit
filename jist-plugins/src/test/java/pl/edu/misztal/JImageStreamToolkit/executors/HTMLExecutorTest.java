@@ -2,6 +2,7 @@ package pl.edu.misztal.JImageStreamToolkit.executors;
 
 import org.junit.Test;
 import pl.edu.misztal.JImageStreamToolkit.executors.html.HTMLExecutor;
+import pl.edu.misztal.JImageStreamToolkit.plugin.MultiPlugin;
 import pl.edu.misztal.JImageStreamToolkit.plugins.binarization.OtsuBinarization;
 import pl.edu.misztal.JImageStreamToolkit.plugins.color.GrayScale;
 
@@ -21,6 +22,23 @@ public class HTMLExecutorTest {
         executor.execute();
 
         executor.save("e:\\github\\JImageStreamToolkit\\results");
+
+//        System.in.read();
+    }
+
+
+    @Test
+    public void executeCaseMultiPlugin() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("lena.png").getFile());
+        HTMLExecutor executor = new HTMLExecutor(file);
+        MultiPlugin mp = new MultiPlugin();
+        mp.add(new GrayScale());
+        mp.add(new OtsuBinarization());
+        executor.add(mp);
+        executor.execute();
+
+        executor.save("e:\\github\\JImageStreamToolkit\\results_mp");
 
 //        System.in.read();
     }

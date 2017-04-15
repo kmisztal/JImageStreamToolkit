@@ -113,3 +113,7 @@ img{
 dl dt {
     white-space: normal;
 }
+
+.well{
+    margin-bottom: 0
+}
