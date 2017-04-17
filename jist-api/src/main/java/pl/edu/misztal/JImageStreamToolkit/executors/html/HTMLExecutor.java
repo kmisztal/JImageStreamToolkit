@@ -100,9 +100,8 @@ public class HTMLExecutor extends StepHandlerExecutor {
                             Files.createDirectories(dest);
                         }
                     } else {
-
-                        //here is error
-                        Files.copy(classLoader.getResourceAsStream(src.toString()), dest, StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println(from.relativize(src).toString());
+                        Files.copy(classLoader.getResourceAsStream("assets\\" + from.relativize(src).toString()), dest, StandardCopyOption.REPLACE_EXISTING);
                     }
                 } catch (IOException et) {
                     throw new RuntimeException("Failed to unzip file.", et);
