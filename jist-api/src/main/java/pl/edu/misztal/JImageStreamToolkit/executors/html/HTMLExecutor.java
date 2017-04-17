@@ -12,6 +12,7 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 
 import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -81,7 +82,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
         }
 
         //save html file
-        try (BufferedWriter htmlWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destPath + "\\results.html"), "UTF-8"))) {
+        try (BufferedWriter htmlWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destPath + File.separator + "results.html"), "UTF-8"))) {
             htmlWriter.write(doc.toString());
             htmlWriter.close();
         } catch (IOException e1) {
@@ -89,27 +90,33 @@ public class HTMLExecutor extends StepHandlerExecutor {
         }
 
         //copy assest
-        Path from = new File(classLoader.getResource("assets").getFile()).toPath();
-        Path to = new File(destPath + "\\assets\\").toPath();
-        try (final Stream<Path> sources = Files.walk(from)) {
-            sources.forEach(src -> {
-                final Path dest = to.resolve(from.relativize(src).toString());
-                try {
-                    if (Files.isDirectory(src)) {
-                        if (Files.notExists(dest)) {
-                            Files.createDirectories(dest);
+        try {
+            Path from = new File(classLoader.getResource("assets").toURI()).toPath();
+            Path to = new File(destPath + File.separator + "assets" + File.separator).toPath();
+            try (final Stream<Path> sources = Files.walk(from)) {
+                sources.forEach(src -> {
+                    final Path dest = to.resolve(from.relativize(src).toString());
+                    try {
+                        if (Files.isDirectory(src)) {
+                            if (Files.notExists(dest)) {
+                                Files.createDirectories(dest);
+                            }
+                        } else {
+                            Files.copy(classLoader.getResourceAsStream("assets"
+                                            + File.separator + from.relativize(src).toString()),
+                                    dest, StandardCopyOption.REPLACE_EXISTING);
                         }
-                    } else {
-                        System.out.println(from.relativize(src).toString());
-                        Files.copy(classLoader.getResourceAsStream("assets\\" + from.relativize(src).toString()), dest, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException et) {
+                        throw new RuntimeException("Failed to unzip file.", et);
                     }
-                } catch (IOException et) {
-                    throw new RuntimeException("Failed to unzip file.", et);
-                }
-            });
-        } catch (IOException e1) {
-            e1.printStackTrace();
+                });
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        } catch (URISyntaxException e) {
+
         }
+
     }
 
     private String html(Attributes attributes) {
