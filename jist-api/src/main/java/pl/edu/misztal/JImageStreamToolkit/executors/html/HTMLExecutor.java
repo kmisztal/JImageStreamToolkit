@@ -90,7 +90,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
 
         //copy assest
         String fromPathName = System.getProperty("os.name").contains("indow") ?
-                "file:\\\\" + classLoader.getResource("assets").getFile().substring(5) :
+                "file:" + File.separator + File.separator + classLoader.getResource("assets").getFile().substring(6) :
                 classLoader.getResource("assets").getFile();
 
         Path from = new File(fromPathName).toPath();
