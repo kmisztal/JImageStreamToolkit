@@ -89,12 +89,13 @@ public class HTMLExecutor extends StepHandlerExecutor {
         }
 
         //copy assest
-        String fromPathName = System.getProperty("os.name").contains("indow") ?
-                classLoader.getResource("assets").getFile().substring(5) :
-                classLoader.getResource("assets").getFile();
+        String v = classLoader.getResource("assets").getFile();
+        String fromPathName = System.getProperty("os.name").contains("indow") && v.startsWith("/") ?
+                v.substring(5) :
+                v;
 
         Path from = new File(fromPathName).toPath();
-        Path to = new File(destPath + File.separator + "assets" + File.separator).toPath();
+        Path to = new File(destPath + "assets" + File.separator).toPath();
         try (final Stream<Path> sources = Files.walk(from)) {
             sources.forEach(src -> {
                 final Path dest = to.resolve(from.relativize(src).toString());
