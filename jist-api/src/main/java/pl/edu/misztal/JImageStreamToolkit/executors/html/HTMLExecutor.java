@@ -14,6 +14,7 @@ import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -87,15 +88,26 @@ public class HTMLExecutor extends StepHandlerExecutor {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+        file.close();
 
         //copy assest
+//        String [] files = {
+//                "css" + File.separator + "bootstrap.min.css",
+//                "css" + File.separator + "tabs.css",
+//        };
+//
+//        Path to = new File(destPath + "assets").toPath();
+//        Files.copy(classLoader.getResourceAsStream("assets" + File.separator +files[0]),
+//                to.resolve("assets" + File.separator +files[0]), StandardCopyOption.REPLACE_EXISTING);
         String v = classLoader.getResource("assets").getFile();
-        String fromPathName = System.getProperty("os.name").contains("indow") && !v.startsWith("/") ?
+
+        String fromPathName = //v;
+                System.getProperty("os.name").contains("indow") && !v.startsWith("/") ?
                 v.substring(5) :
                 v;
 
         Path from = new File(fromPathName).toPath();
-        Path to = new File(destPath + "assets").toPath();
+        Path to = new File(destPath + File.separator + "assets").toPath();
         try (final Stream<Path> sources = Files.walk(from)) {
             sources.forEach(src -> {
                 final Path dest = to.resolve(from.relativize(src).toString());
@@ -114,7 +126,28 @@ public class HTMLExecutor extends StepHandlerExecutor {
                 }
             });
         } catch (IOException e1) {
-            e1.printStackTrace();
+            //TODO: it is really bad :(
+            String[] srcs = {
+                    "/assets/css/tabs.css",
+                    "/assets/css/bootstrap.min.css",
+                    "/assets/css/ie10-viewport-bug-workaround.css",
+                    "/assets/css/starter-template.css",
+                    "/assets/img/favicon.ico",
+                    "/assets/js/jquery.min.js",
+                    "/assets/js/bootstrap.min.js",
+                    "/assets/js/ie10-viewport-bug-workaround.js",
+                    "/assets/js/ie-emulation-modes-warning.js",
+            };
+            for (String src : srcs) {
+                final Path dest = Paths.get(to.toString(), src.substring(7));
+                File parent = dest.toFile().getParentFile();
+                if (!parent.exists() && !parent.mkdirs()) {
+                    throw new IllegalStateException("Couldn't create dir: " + parent);
+                }
+                System.out.println(src);
+                Files.copy(classLoader.getResourceAsStream(src.substring(1)),
+                        dest, StandardCopyOption.REPLACE_EXISTING);
+            }
         }
     }
 
