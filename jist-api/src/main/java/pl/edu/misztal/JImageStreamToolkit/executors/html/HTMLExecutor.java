@@ -95,7 +95,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
                 v;
 
         Path from = new File(fromPathName).toPath();
-        Path to = new File(destPath + "assets" + File.separator).toPath();
+        Path to = new File(destPath + "assets").toPath();
         try (final Stream<Path> sources = Files.walk(from)) {
             sources.forEach(src -> {
                 final Path dest = to.resolve(from.relativize(src).toString());
