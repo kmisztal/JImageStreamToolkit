@@ -8,9 +8,6 @@ import pl.edu.misztal.JImageStreamToolkit.plugins.color.GrayScale;
 
 import java.io.File;
 
-/**
- * Created by krzys on 14.04.2017.
- */
 public class HTMLExecutorTest {
     @Test
     public void executeCase() throws Exception {
@@ -23,7 +20,9 @@ public class HTMLExecutorTest {
 
         executor.save("e:\\github\\JImageStreamToolkit\\results");
 
-//        System.in.read();
+        executor.open();
+
+        System.in.read();
     }
 
 

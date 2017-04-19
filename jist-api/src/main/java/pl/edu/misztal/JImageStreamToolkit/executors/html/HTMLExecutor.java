@@ -22,6 +22,8 @@ import java.util.stream.Stream;
 public class HTMLExecutor extends StepHandlerExecutor {
 
 
+    private String lastSavePath;
+
     public HTMLExecutor(File... files) throws IOException {
         super(files);
     }
@@ -31,6 +33,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
     }
 
     public void save(String destPath) throws IOException {
+        this.lastSavePath = destPath + File.separator + "results.html";
         Path dest_ = new File(destPath).toPath();
         if (Files.notExists(dest_)) {
             Files.createDirectory(dest_);
@@ -90,21 +93,11 @@ public class HTMLExecutor extends StepHandlerExecutor {
         }
         file.close();
 
-        //copy assest
-//        String [] files = {
-//                "css" + File.separator + "bootstrap.min.css",
-//                "css" + File.separator + "tabs.css",
-//        };
-//
-//        Path to = new File(destPath + "assets").toPath();
-//        Files.copy(classLoader.getResourceAsStream("assets" + File.separator +files[0]),
-//                to.resolve("assets" + File.separator +files[0]), StandardCopyOption.REPLACE_EXISTING);
         String v = classLoader.getResource("assets").getFile();
-
         String fromPathName = //v;
                 System.getProperty("os.name").contains("indow") && !v.startsWith("/") ?
-                v.substring(5) :
-                v;
+                        v.substring(5) :
+                        v;
 
         Path from = new File(fromPathName).toPath();
         Path to = new File(destPath + File.separator + "assets").toPath();
@@ -178,5 +171,17 @@ public class HTMLExecutor extends StepHandlerExecutor {
         }
         sb.append("</dl>");
         return sb.toString();
+    }
+
+
+    public void open() {
+        if (this.lastSavePath != null && new File(this.lastSavePath).exists()) {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.open(new File(this.lastSavePath));
+            } catch (IOException ignored) {
+
+            }
+        }
     }
 }
