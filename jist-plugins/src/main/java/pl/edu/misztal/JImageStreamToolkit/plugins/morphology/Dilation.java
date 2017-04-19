@@ -5,16 +5,16 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 import pl.edu.uj.JImageStream.filters.morphology.DilationFilter;
 
 public class Dilation extends Plugin {
-    private int kernelSize = 3;
+    private int kernelRadius = 3;
     private int kernelShape = DilationFilter.BALL_KERNEL;
 
-    public Dilation(int kernelSize, int kernelShape) {
-        this.kernelSize = kernelSize;
+    public Dilation(int kernelRadius, int kernelShape) {
+        this.kernelRadius = kernelRadius;
         this.kernelShape = kernelShape;
     }
 
-    public Dilation(int kernelSize) {
-        this.kernelSize = kernelSize;
+    public Dilation(int kernelRadius) {
+        this.kernelRadius = kernelRadius;
     }
 
     public Dilation() {
@@ -23,8 +23,15 @@ public class Dilation extends Plugin {
     protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
-                        .apply(new DilationFilter(this.kernelSize, this.kernelShape))
+                        .apply(new DilationFilter(2 * this.kernelRadius + 1, this.kernelShape))
                         .collect(new pl.edu.uj.JImageStream.collectors.BufferedImageCollector())
+        );
+        setAttribute("kernelRadius", this.kernelRadius);
+        setAttribute("kernelShape",
+                this.kernelShape == 0 ? "SQUARE_KERNEL"
+                        : this.kernelShape == 1 ? "BALL_KERNEL"
+                        : this.kernelShape == 2 ? "VERTICAL_LINE_KERNEL"
+                        : this.kernelShape == 3 ? "HORIZONTAL_LINE_KERNEL" : "N/A"
         );
     }
 }
