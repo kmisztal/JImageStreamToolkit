@@ -51,7 +51,9 @@ public class HTMLExecutor extends StepHandlerExecutor {
             Files.createDirectory(images);
         }
         int it = 1;
+        System.out.println("Saving images");
         for (Pair<Images, Plugin> p : imageList) {
+            System.out.println(1 + " / " + imageList.size());
             String res = "images" + File.separator + String.format("%03d", it);
 
             String[] names = p.getKey().save(destPath + File.separator + res, "png");
@@ -137,7 +139,6 @@ public class HTMLExecutor extends StepHandlerExecutor {
                 if (!parent.exists() && !parent.mkdirs()) {
                     throw new IllegalStateException("Couldn't create dir: " + parent);
                 }
-                System.out.println(src);
                 Files.copy(classLoader.getResourceAsStream(src.substring(1)),
                         dest, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -178,6 +179,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
         if (this.lastSavePath != null && new File(this.lastSavePath).exists()) {
             Desktop desktop = Desktop.getDesktop();
             try {
+                System.out.println("The file would be open");
                 desktop.open(new File(this.lastSavePath));
             } catch (IOException ignored) {
 
