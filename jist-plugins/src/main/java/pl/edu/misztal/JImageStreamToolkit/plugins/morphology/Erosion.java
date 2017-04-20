@@ -5,8 +5,8 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 import pl.edu.uj.JImageStream.filters.morphology.ErosionFilter;
 
 public class Erosion extends Plugin {
-    private int kernelRadius = 3;
-    private int kernelShape = ErosionFilter.BALL_KERNEL;
+    private int kernelRadius = 1;
+    private int kernelShape = ErosionFilter.SQUARE_KERNEL;
 
     public Erosion(int kernelRadius, int kernelShape) {
         this.kernelRadius = kernelRadius;

@@ -5,8 +5,8 @@ import pl.edu.misztal.JImageStreamToolkit.plugin.Plugin;
 import pl.edu.uj.JImageStream.filters.morphology.DilationFilter;
 
 public class Dilation extends Plugin {
-    private int kernelRadius = 3;
-    private int kernelShape = DilationFilter.BALL_KERNEL;
+    private int kernelRadius = 1;
+    private int kernelShape = DilationFilter.SQUARE_KERNEL;
 
     public Dilation(int kernelRadius, int kernelShape) {
         this.kernelRadius = kernelRadius;
