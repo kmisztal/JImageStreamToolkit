@@ -63,7 +63,7 @@ public class StepHandlerExecutor extends Executor {
                     pp.apply(currentImages);
                     imageList.add(new Pair<>(currentImages.clone(), pp));
                     progress.increment();
-                    te.endJob(true);
+                    te.endJob(false);
                 });
             } else {
                 te.startJob(p.getName());
@@ -71,12 +71,12 @@ public class StepHandlerExecutor extends Executor {
                 p.apply(currentImages);
                 imageList.add(new Pair<>(currentImages.clone(), p));
                 progress.increment();
-                te.endJob(true);
+                te.endJob(false);
             }
         });
 
         te.stopEvent();
-        te.printEventExecutionTime();
+        System.out.println(te.printEventExecutionTime());
     }
 }
 

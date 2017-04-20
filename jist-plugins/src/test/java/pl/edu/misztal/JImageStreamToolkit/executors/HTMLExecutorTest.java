@@ -20,9 +20,9 @@ public class HTMLExecutorTest {
 
         executor.save("e:\\github\\JImageStreamToolkit\\results");
 
-        executor.open();
+//        executor.open();
 
-        System.in.read();
+//        System.in.read();
     }
 
 

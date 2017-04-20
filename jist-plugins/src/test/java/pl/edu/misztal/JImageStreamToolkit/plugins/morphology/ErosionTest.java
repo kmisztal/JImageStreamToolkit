@@ -17,7 +17,7 @@ public class ErosionTest {
         new Erosion(4).apply(image);
         new ImageFrame(image).display();
 
-        System.in.read();
+//        System.in.read();
     }
 
 }
