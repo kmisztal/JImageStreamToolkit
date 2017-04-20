@@ -53,7 +53,7 @@ public class HTMLExecutor extends StepHandlerExecutor {
         int it = 1;
         System.out.println("Saving images");
         for (Pair<Images, Plugin> p : imageList) {
-            System.out.println(1 + " / " + imageList.size());
+            System.out.println(it + " / " + imageList.size());
             String res = "images" + File.separator + String.format("%03d", it);
 
             String[] names = p.getKey().save(destPath + File.separator + res, "png");
