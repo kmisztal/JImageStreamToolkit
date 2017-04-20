@@ -23,7 +23,7 @@ public class Dilation extends Plugin {
     protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
-                        .apply(new DilationFilter(2 * this.kernelRadius + 1, this.kernelShape))
+                        .apply(new DilationFilter(this.kernelRadius, this.kernelShape))
                         .collect(new pl.edu.uj.JImageStream.collectors.BufferedImageCollector())
         );
         setAttribute("kernelRadius", this.kernelRadius);

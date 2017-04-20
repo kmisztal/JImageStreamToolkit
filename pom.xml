@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.github.kmisztal</groupId>
             <artifactId>JImageStream</artifactId>
-            <version>0579e2f</version>
+            <version>4fe1ed9</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
