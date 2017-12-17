@@ -13,7 +13,7 @@ public class HTMLExecutorTest {
     public void executeCase() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("lena.png").getFile());
-        HTMLExecutor executor = new HTMLExecutor(file);
+        HTMLExecutor executor = ExecutorsFactory.getHTMLExecutor(file);
         executor.add(new GrayScale());
         executor.add(new OtsuBinarization());
         executor.execute();
@@ -30,7 +30,7 @@ public class HTMLExecutorTest {
     public void executeCaseMultiPlugin() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("lena.png").getFile());
-        HTMLExecutor executor = new HTMLExecutor(file);
+        HTMLExecutor executor = ExecutorsFactory.getHTMLExecutor(file);
         MultiPlugin mp = new MultiPlugin();
         mp.add(new GrayScale());
         mp.add(new OtsuBinarization());

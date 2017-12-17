@@ -8,7 +8,7 @@ public class ColorNegate extends Plugin {
     protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
-                        .apply(new pl.edu.uj.JImageStream.filters.color.InvertFilter())
+                        .apply(new pl.edu.uj.JImageStream.filters.arithmetic.InvertFilter())
                         .collect(new pl.edu.uj.JImageStream.collectors.BufferedImageCollector())
         );
     }

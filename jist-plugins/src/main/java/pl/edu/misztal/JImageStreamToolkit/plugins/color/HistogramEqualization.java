@@ -7,7 +7,7 @@ public class HistogramEqualization extends Plugin {
     protected void process(Image imgIn, Image imgOut) {
         imgOut.setBufferedImage(
                 imgIn.parallelStream()
-                        .apply(new pl.edu.uj.JImageStream.filters.color.HistogramEqualization())
+                        .apply(new pl.edu.uj.JImageStream.filters.equalization.HistogramEqualization())
                         .collect(new pl.edu.uj.JImageStream.collectors.BufferedImageCollector())
         );
     }
