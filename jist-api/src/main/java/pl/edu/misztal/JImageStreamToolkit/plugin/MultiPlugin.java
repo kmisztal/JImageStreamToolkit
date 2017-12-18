@@ -5,9 +5,9 @@ import pl.edu.misztal.JImageStreamToolkit.image.Image;
 import java.util.ArrayList;
 
 public class MultiPlugin extends Plugin {
-    private ArrayList<Plugin> plugins = new ArrayList<>();
-    private ArrayList<Image> images = new ArrayList<>();
-    private boolean rememberImages = true;
+    protected ArrayList<Plugin> plugins = new ArrayList<>();
+    protected ArrayList<Image> images = new ArrayList<>();
+    protected boolean rememberImages = true;
 
     public MultiPlugin() {
     }
