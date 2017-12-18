@@ -49,7 +49,7 @@ public class MultiPlugin extends Plugin {
         imgOut.setBufferedImage(currentImage.getBufferedImage());
     }
 
-    private void addImage(Image image) {
+    protected void addImage(Image image) {
         if (rememberImages)
             this.images.add(image.clone());
     }
